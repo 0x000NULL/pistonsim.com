@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FiMenu, FiX, FiGithub } from 'react-icons/fi'
+import { FiMenu, FiX } from 'react-icons/fi'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -11,6 +11,7 @@ const Header = () => {
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/features/', label: 'Features' },
+    { href: '/about/', label: 'About' },
   ]
 
   return (
@@ -41,15 +42,6 @@ const Header = () => {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-primary transition-all group-hover:w-full"></span>
               </Link>
             ))}
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-text-secondary hover:text-text-primary transition-colors"
-              aria-label="GitHub"
-            >
-              <FiGithub className="w-5 h-5" />
-            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -83,15 +75,6 @@ const Header = () => {
                     {link.label}
                   </Link>
                 ))}
-                <a
-                  href="https://github.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-2 text-text-secondary hover:text-text-primary transition-colors py-2"
-                >
-                  <FiGithub className="w-5 h-5" />
-                  <span>GitHub</span>
-                </a>
               </div>
             </motion.div>
           )}

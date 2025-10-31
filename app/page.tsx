@@ -5,7 +5,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Button from '@/components/Button'
 import FeatureCard from '@/components/FeatureCard'
-import { FiActivity, FiDatabase, FiCpu, FiArrowRight, FiGithub } from 'react-icons/fi'
+import { FiActivity, FiDatabase, FiCpu, FiArrowRight } from 'react-icons/fi'
 
 export default function Home() {
   return (
@@ -36,11 +36,7 @@ export default function Home() {
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button href="https://github.com" external size="lg">
-                  <FiGithub className="mr-2" />
-                  View on GitHub
-                </Button>
-                <Button href="/features/" variant="secondary" size="lg">
+                <Button href="/features/" size="lg">
                   Explore Features
                   <FiArrowRight className="ml-2" />
                 </Button>
@@ -100,7 +96,7 @@ export default function Home() {
                 <FeatureCard
                   icon={<FiDatabase />}
                   title="Real Parts Database"
-                  description="SQLite-powered catalog with 50-100+ real parts from GM, Honda, and more. Intelligent compatibility checking and pricing data."
+                  description="SQLite-powered catalog with 50+ real parts from GM, Honda, and more. Intelligent compatibility checking and pricing data."
                 />
                 <FeatureCard
                   icon={<FiCpu />}
@@ -250,15 +246,11 @@ export default function Home() {
                 START SIMULATING
               </h2>
               <p className="text-text-secondary text-lg mb-8 max-w-2xl mx-auto">
-                Free alpha release. Open source. Built for engineers and enthusiasts.
+                Free alpha release. Built for engineers and enthusiasts.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button href="https://github.com" external size="lg">
-                  <FiGithub className="mr-2" />
-                  View on GitHub
-                </Button>
-                <Button href="https://github.com" external variant="secondary" size="lg">
-                  Read Documentation
+                <Button href="/features/" size="lg">
+                  Learn More
                   <FiArrowRight className="ml-2" />
                 </Button>
               </div>
