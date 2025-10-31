@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Button from '@/components/Button'
-import { FiGithub, FiArrowRight } from 'react-icons/fi'
+import { FiArrowRight } from 'react-icons/fi'
 
 export default function Features() {
   return (
@@ -346,14 +346,10 @@ export default function Features() {
                 READY TO BUILD?
               </h2>
               <p className="text-text-secondary text-lg mb-8 max-w-2xl mx-auto">
-                Download the alpha release and start testing your engine configurations today.
+                Start testing your engine configurations today.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button href="https://github.com" external size="lg">
-                  <FiGithub className="mr-2" />
-                  View on GitHub
-                </Button>
-                <Button href="/" variant="secondary" size="lg">
+                <Button href="/" size="lg">
                   Back to Home
                   <FiArrowRight className="ml-2" />
                 </Button>
