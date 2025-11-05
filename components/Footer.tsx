@@ -1,17 +1,21 @@
 'use client'
 
 import Link from 'next/link'
+import { NavLink, ROUTES } from '@/lib/types'
 
-const Footer = () => {
+export default function Footer(): React.ReactElement {
   const currentYear = new Date().getFullYear()
 
-  const footerLinks = {
+  const footerLinks: {
+    product: NavLink[]
+    company: NavLink[]
+  } = {
     product: [
-      { href: '/', label: 'Home' },
-      { href: '/features/', label: 'Features' },
+      { href: ROUTES.HOME, label: 'Home' },
+      { href: ROUTES.FEATURES, label: 'Features' },
     ],
     company: [
-      { href: '/about/', label: 'About' },
+      { href: ROUTES.ABOUT, label: 'About' },
       { href: '/#contact', label: 'Contact' },
     ],
   }
@@ -79,5 +83,3 @@ const Footer = () => {
     </footer>
   )
 }
-
-export default Footer

@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
-
 :root {
   /* Color Palette */
   --bg-primary: #000000;
@@ -76,6 +73,22 @@ body {
   background: var(--border-hover);
 }
 
+/* Keyboard Navigation Focus Styles */
+*:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
 /* Custom Utility Classes */
 @layer utilities {
   .text-gradient-cyan {
@@ -132,5 +145,40 @@ body {
       padding-left: 2rem;
       padding-right: 2rem;
     }
+  }
+
+  /* Section divider */
+  .section-divider {
+    width: 100%;
+    height: 0;
+    border-top: 2px dashed var(--border);
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+  }
+
+  /* List item with custom marker */
+  .list-item-custom {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .list-item-marker {
+    color: var(--accent-primary);
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+  }
+
+  /* Feature card with dashed border */
+  .feature-card-border {
+    border: 2px dashed var(--border);
+    transition: border-color 0.2s ease;
+    padding: 2rem;
+    background-color: var(--bg-secondary);
+  }
+
+  .feature-card-border:hover {
+    border-color: var(--accent-primary);
   }
 }

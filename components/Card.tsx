@@ -1,5 +1,3 @@
-'use client'
-
 import { ReactNode } from 'react'
 
 interface CardProps {
@@ -9,7 +7,7 @@ interface CardProps {
   dotted?: boolean
 }
 
-const Card = ({ children, className = '', hover = true, dotted = true }: CardProps) => {
+export default function Card({ children, className = '', hover = true, dotted = true }: CardProps): React.ReactElement {
   const borderClass = dotted ? 'border-2 border-dashed' : 'border'
   const hoverClass = hover ? 'hover:border-accent-primary' : ''
 
@@ -21,5 +19,3 @@ const Card = ({ children, className = '', hover = true, dotted = true }: CardPro
     </div>
   )
 }
-
-export default Card

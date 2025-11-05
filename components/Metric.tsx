@@ -10,7 +10,7 @@ interface MetricProps {
   className?: string
 }
 
-const Metric = ({ value, label, suffix = '', color = 'red', className = '' }: MetricProps) => {
+export default function Metric({ value, label, suffix = '', color = 'red', className = '' }: MetricProps): React.ReactElement {
   const colorClasses = {
     red: 'text-accent-primary',
     blue: 'text-accent-secondary',
@@ -35,5 +35,3 @@ const Metric = ({ value, label, suffix = '', color = 'red', className = '' }: Me
     </motion.div>
   )
 }
-
-export default Metric

@@ -6,7 +6,7 @@ import Footer from '@/components/Footer'
 import Button from '@/components/Button'
 import { FiArrowRight } from 'react-icons/fi'
 
-export default function Features() {
+export default function Features(): React.ReactElement {
   return (
     <>
       <Header />

@@ -1,5 +1,3 @@
-'use client'
-
 import { ReactNode } from 'react'
 
 interface FeatureCardProps {
@@ -9,7 +7,7 @@ interface FeatureCardProps {
   className?: string
 }
 
-const FeatureCard = ({ icon, title, description, className = '' }: FeatureCardProps) => {
+export default function FeatureCard({ icon, title, description, className = '' }: FeatureCardProps): React.ReactElement {
   return (
     <div className={`border-2 border-dashed border-border hover:border-accent-primary transition-colors duration-300 p-8 bg-background-secondary ${className}`}>
       <div className="text-accent-primary text-5xl mb-6">
@@ -24,5 +22,3 @@ const FeatureCard = ({ icon, title, description, className = '' }: FeatureCardPr
     </div>
   )
 }
-
-export default FeatureCard
