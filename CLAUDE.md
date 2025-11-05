@@ -23,6 +23,27 @@ npm run start
 
 # Lint code
 npm run lint
+
+# Fix linting issues automatically
+npm run lint:fix
+
+# Run tests
+npm test
+
+# Run tests in watch mode
+npm test:watch
+
+# Generate test coverage report
+npm test:coverage
+
+# Type checking without emitting files
+npm run type-check
+
+# Format code with Prettier
+npm run format
+
+# Check code formatting
+npm run format:check
 ```
 
 ## Architecture
@@ -43,6 +64,9 @@ pistonsim.com/
 │   ├── layout.tsx         # Root layout with font loading
 │   ├── page.tsx           # Landing page (client component)
 │   ├── features/          # Features page
+│   ├── about/             # About page
+│   ├── error.tsx          # Error boundary page
+│   ├── not-found.tsx      # 404 page
 │   └── globals.css        # Global styles, CSS variables, utilities
 ├── components/            # Reusable React components
 │   ├── Header.tsx         # Fixed navigation with mobile menu
@@ -50,9 +74,95 @@ pistonsim.com/
 │   ├── Button.tsx         # CTA buttons
 │   ├── Card.tsx           # Content cards
 │   ├── FeatureCard.tsx    # Feature showcase cards
-│   └── Metric.tsx         # Statistics display
-└── public/                # Static assets
+│   ├── Metric.tsx         # Statistics display
+│   ├── ErrorBoundary.tsx  # React error boundary
+│   ├── MotionProvider.tsx # Framer Motion lazy loading wrapper
+│   └── AccessibleMotion.tsx # Motion components with a11y support
+├── lib/                   # Utility functions and shared code
+│   ├── animations.ts      # Framer Motion animation variants
+│   ├── icons.ts           # React Icons exports
+│   ├── types.ts           # TypeScript types and constants
+│   ├── validation.ts      # Input validation utilities
+│   ├── reducedMotion.ts   # Accessibility motion detection
+│   └── polyfills.ts       # Browser polyfills
+├── __tests__/             # Jest test files
+│   └── components/        # Component tests
+├── functions/             # Cloudflare Pages Functions (serverless)
+│   └── api/
+│       └── newsletter.ts  # Newsletter signup handler
+├── public/                # Static assets
+└── jest.config.js         # Jest test configuration
 ```
+
+### Serverless Functions (Cloudflare Pages Functions)
+
+The site uses Cloudflare Pages Functions for server-side functionality while maintaining static export compatibility.
+
+#### Newsletter Signup Function
+
+**Location**: `/functions/api/newsletter.ts`
+**Endpoint**: `/api/newsletter` (POST)
+**Runtime**: Cloudflare Pages Functions (V8 Isolates)
+
+**Purpose**: Securely handles newsletter subscriptions via Resend API without exposing API keys to the client.
+
+**Environment Variables Required** (configured in Cloudflare Pages dashboard):
+- `RESEND_API_KEY`: Your Resend API key (starts with `re_`)
+- `RESEND_AUDIENCE_ID`: Target audience ID (`e5d251bf-2af8-4682-a665-429ff1804e17`)
+
+**Features**:
+- Server-side email validation (RFC 5322 compliant)
+- IP-based rate limiting (5 requests per minute per IP)
+- CORS support for browser requests
+- Secure API key handling (never exposed to client)
+- Comprehensive error handling with generic client messages
+
+**API Integration**:
+```typescript
+POST https://api.resend.com/contacts
+Headers: { Authorization: Bearer {RESEND_API_KEY}, Content-Type: application/json }
+Body: { email: string, audience_id: string }
+```
+
+**Request Format**:
+```bash
+POST /api/newsletter
+Content-Type: application/json
+
+{ "email": "user@example.com" }
+```
+
+**Response Format**:
+```json
+{
+  "success": true|false,
+  "message": "User-friendly message",
+  "error": "Error details (optional)"
+}
+```
+
+**Local Testing**:
+```bash
+# Build static site first
+npm run build
+
+# Test function locally with Wrangler
+npx wrangler pages dev out \
+  --binding RESEND_API_KEY=re_test_key \
+  --binding RESEND_AUDIENCE_ID=e5d251bf-2af8-4682-a665-429ff1804e17
+
+# Test with curl
+curl -X POST http://localhost:8788/api/newsletter \
+  -H "Content-Type: application/json" \
+  -d '{"email":"test@example.com"}'
+```
+
+**Deployment Notes**:
+- Functions deploy automatically with static site to Cloudflare Pages
+- No configuration needed in `next.config.ts`
+- Environment variables must be set in Cloudflare dashboard before deployment
+- Functions run on Cloudflare's edge network (low latency)
+- Cold start time: ~10-50ms
 
 ### Design System
 
@@ -67,7 +177,7 @@ All design tokens are defined in `tailwind.config.ts` and `app/globals.css`:
 **Typography**:
 - Display/Headings: JetBrains Mono (monospace, technical aesthetic)
 - Body: Inter (clean, readable)
-- All fonts loaded via Google Fonts CDN in `globals.css`
+- All fonts loaded via Google Fonts CDN in `globals.css` AND via Next.js font optimization in `layout.tsx`
 - Font variables: `--font-inter`, `--font-jetbrains-mono`
 
 **Visual Style**:
@@ -85,15 +195,49 @@ All design tokens are defined in `tailwind.config.ts` and `app/globals.css`:
 - Page load animations (`initial`, `animate`, `transition`)
 - Scroll-triggered animations (`whileInView`, `viewport: { once: true }`)
 - Mobile menu transitions (`AnimatePresence`)
+- Accessibility: Motion respects `prefers-reduced-motion` via `lib/reducedMotion.ts`
+- Performance: Uses `LazyMotion` with `domAnimation` to reduce bundle size
+
+**Accessibility**:
+- Error boundaries (`ErrorBoundary.tsx`, `AnimationErrorBoundary.tsx`) catch render errors
+- `SkipLink` component for keyboard navigation
+- Focus management with `:focus-visible` styles
+- ARIA labels and roles on interactive elements
+- Reduced motion support for users with motion sensitivities
+- Semantic HTML structure
 
 **Styling Conventions**:
 - Tailwind CSS utility classes
-- Custom utilities in `globals.css`: `.text-cyan`, `.glow-cyan`, `.container-custom`
+- Custom utilities in `globals.css`: `.text-cyan`, `.container-custom`, `.section-divider`
 - Semantic color classes from Tailwind config: `text-accent-primary`, `bg-background-secondary`
+- CSS containment for performance isolation (`.metric-card`, `.section-isolated`)
 
 **Component Props Pattern**:
 - Buttons accept `href`, `variant`, `size`, `external` props
 - Cards typically use icon + title + description structure
+- All components have explicit TypeScript return types (`: React.ReactElement`)
+
+**Module Resolution**: Path aliases configured with `@/` mapping to root directory
+
+### Animation Architecture
+
+The animation system is centralized in `lib/animations.ts`:
+
+- **Standard variants**: `fadeInUp`, `fadeIn`, `slideDown` for common animations
+- **Timing utilities**: Pre-configured transitions like `fadeInUpTransition`
+- **Accessibility functions**: `getAccessibleAnimation`, `accessibleFadeInUp` respect `prefers-reduced-motion`
+- **Viewport config**: `viewportConfig` for scroll-triggered animations with proper margins
+- **Provider pattern**: `MotionProvider` wraps the app with `LazyMotion` for lazy-loaded animation features
+
+All page-level components use `'use client'` and import from `framer-motion` as `m` (e.g., `m.div`, `m.section`).
+
+### Testing
+
+- **Framework**: Jest with React Testing Library
+- **Test location**: `__tests__/` directory matching source structure
+- **Setup file**: `jest.setup.js` for global test configuration
+- **Path aliases**: Jest configured to resolve `@/` paths
+- **Coverage**: Tracks coverage for `app/`, `components/`, and `lib/` directories
 
 ## Important Constraints
 
@@ -101,11 +245,11 @@ All design tokens are defined in `tailwind.config.ts` and `app/globals.css`:
 
 2. **Image Optimization**: Images are set to `unoptimized: true`. Use standard `<img>` tags or ensure Next.js Image component works with this constraint.
 
-3. **GitHub Links**: Many GitHub links are placeholder (`https://github.com`). Update these with actual repository URLs when available.
+3. **Font Loading**: Fonts are loaded both via Google Fonts CDN (@import in globals.css) and Next.js font optimization (layout.tsx). This dual approach ensures fonts work in static export.
 
-4. **Font Loading**: Fonts are loaded both via Google Fonts CDN (@import in globals.css) and Next.js font optimization (layout.tsx). This dual approach ensures fonts work in static export.
+4. **Responsive Container**: Use `.container-custom` class for consistent max-width (1280px) and responsive padding.
 
-5. **Responsive Container**: Use `.container-custom` class for consistent max-width (1280px) and responsive padding.
+5. **Animation Performance**: Use `will-change-transform-opacity` class for elements that will animate, and remove with `will-change-auto` after animation completes.
 
 ## Deployment Notes
 
@@ -118,6 +262,7 @@ All design tokens are defined in `tailwind.config.ts` and `app/globals.css`:
 
 - TypeScript strict mode
 - Functional components with hooks
-- Explicit return types for TypeScript components
+- Explicit return types for TypeScript components (`: React.ReactElement`)
 - Descriptive component and prop names
 - Comments are minimal - code should be self-documenting
+- All interactive components must have proper ARIA labels and keyboard support

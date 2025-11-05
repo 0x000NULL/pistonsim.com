@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import Button from '@/components/Button'
 import SectionDivider from '@/components/SectionDivider'
 import ListItem from '@/components/ListItem'
+import NewsletterForm from '@/components/NewsletterForm'
 import { fadeInUp, fadeInUpTransition, fadeIn, viewportConfig } from '@/lib/animations'
 import { FiArrowRight } from '@/lib/icons'
 
@@ -222,6 +223,126 @@ export default function Features(): React.ReactElement {
 
             <SectionDivider />
 
+            {/* UI Preview Section */}
+            <m.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="animate"
+              viewport={viewportConfig}
+              className="mb-20"
+            >
+              <h2 className="font-display font-bold text-3xl text-cyan mb-12">
+                USER INTERFACE
+              </h2>
+
+              <div className="border-2 border-dashed border-border p-8 bg-background-secondary">
+                <div className="text-center mb-6">
+                  <p className="text-text-secondary mb-4">
+                    Clean, terminal-inspired interface with real-time visualization
+                  </p>
+                  <div className="inline-block px-4 py-2 bg-accent-primary/10 border border-dashed border-accent-primary rounded text-accent-primary text-sm font-display font-semibold">
+                    Coming in Phase 2: Dear ImGui Interface
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                  <div>
+                    <h3 className="font-display font-semibold text-lg text-text-primary mb-4">
+                      Planned Features
+                    </h3>
+                    <ul className="space-y-2 text-text-secondary">
+                      <ListItem>Real-time performance graphs and dyno curves</ListItem>
+                      <ListItem>Interactive parts browser with compatibility checking</ListItem>
+                      <ListItem>Configuration save/load management</ListItem>
+                      <ListItem>Export data to CSV and other formats</ListItem>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h3 className="font-display font-semibold text-lg text-text-primary mb-4">
+                      Design Philosophy
+                    </h3>
+                    <ul className="space-y-2 text-text-secondary">
+                      <ListItem>Focus on data density and clarity</ListItem>
+                      <ListItem>Keyboard shortcuts for power users</ListItem>
+                      <ListItem>Cross-platform native performance</ListItem>
+                      <ListItem>Minimal distractions, maximum information</ListItem>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </m.div>
+
+            <SectionDivider />
+
+            {/* Sample Output Section */}
+            <m.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="animate"
+              viewport={viewportConfig}
+              className="mb-20"
+            >
+              <h2 className="font-display font-bold text-3xl text-cyan mb-12">
+                SAMPLE OUTPUT
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="border-2 border-dashed border-border p-6 bg-background-secondary">
+                  <h3 className="font-display font-semibold text-lg text-cyan mb-4">
+                    Performance Curves
+                  </h3>
+                  <div className="font-mono text-xs text-text-secondary space-y-1 mb-4">
+                    <div>RPM    | Power (HP) | Torque (lb-ft)</div>
+                    <div className="border-t border-dashed border-border pt-1">
+                      2000   | 125.3      | 328.4
+                    </div>
+                    <div>3000   | 215.7      | 377.2</div>
+                    <div>4000   | 305.1      | 399.8</div>
+                    <div>5000   | 385.2      | 403.9</div>
+                    <div>6000   | 445.8      | 389.5</div>
+                    <div>7000   | 462.1      | 346.0</div>
+                  </div>
+                  <p className="text-text-tertiary text-xs">
+                    Example: LS3 6.2L with mild cam upgrade
+                  </p>
+                </div>
+
+                <div className="border-2 border-dashed border-border p-6 bg-background-secondary">
+                  <h3 className="font-display font-semibold text-lg text-cyan mb-4">
+                    Validation Report
+                  </h3>
+                  <div className="font-mono text-xs text-text-secondary space-y-1 mb-4">
+                    <div>Configuration: LS3 Stock</div>
+                    <div>Peak Power:    430 HP @ 5900 RPM</div>
+                    <div>Peak Torque:   424 lb-ft @ 4600 RPM</div>
+                    <div className="border-t border-dashed border-border pt-1 mt-2">
+                      Validation vs GM Dyno:
+                    </div>
+                    <div>Mean Error:    4.2%</div>
+                    <div>Max Error:     6.8%</div>
+                    <div>R² Correlation: 0.985</div>
+                  </div>
+                  <p className="text-text-tertiary text-xs">
+                    Validated against certified dynamometer data
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 p-6 border-2 border-dashed border-accent-primary bg-background-secondary">
+                <h3 className="font-display font-semibold text-lg text-text-primary mb-3">
+                  Comprehensive Data Export
+                </h3>
+                <p className="text-text-secondary text-sm">
+                  All simulation results can be exported to CSV format for further analysis in Excel,
+                  Python, MATLAB, or your preferred data analysis tools. Full thermodynamic state data
+                  available for advanced users.
+                </p>
+              </div>
+            </m.div>
+
+            <SectionDivider />
+
             {/* Development Roadmap */}
             <m.div
               variants={fadeIn}
@@ -292,11 +413,22 @@ export default function Features(): React.ReactElement {
               <p className="text-text-secondary text-lg mb-8 max-w-2xl mx-auto">
                 Start testing your engine configurations today.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
                 <Button href="/" size="lg">
                   Back to Home
                   <FiArrowRight className="ml-2" />
                 </Button>
+              </div>
+
+              {/* Newsletter Signup */}
+              <div className="max-w-md mx-auto pt-8 border-t-2 border-dashed border-border">
+                <h3 className="font-display font-semibold text-xl text-text-primary mb-3">
+                  Get Feature Updates
+                </h3>
+                <p className="text-text-secondary text-sm mb-6">
+                  Subscribe for notifications when new features ship.
+                </p>
+                <NewsletterForm variant="inline" placeholder="Enter your email" />
               </div>
             </m.div>
           </div>

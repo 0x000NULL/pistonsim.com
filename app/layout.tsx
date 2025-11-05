@@ -20,14 +20,69 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'PISTON - Professional Engine Simulation',
-  description: 'Professional-grade engine simulation at enthusiast-accessible pricing. Physics-based thermodynamic modeling for engine builders, tuners, and automotive enthusiasts.',
-  keywords: ['engine simulation', 'dyno', 'engine tuning', 'thermodynamics', 'automotive', 'performance'],
+  metadataBase: new URL('https://pistonsim.com'),
+  title: {
+    default: 'PISTON - Professional Engine Simulation',
+    template: '%s | PISTON',
+  },
+  description:
+    'Professional-grade engine simulation at enthusiast-accessible pricing. Physics-based thermodynamic modeling for engine builders, tuners, and automotive enthusiasts.',
+  keywords: [
+    'engine simulation',
+    'dyno simulation',
+    'engine tuning',
+    'thermodynamics',
+    'automotive performance',
+    'engine building',
+    'virtual dyno',
+    'GT-POWER alternative',
+    'Ricardo WAVE alternative',
+    'LS engine simulation',
+    'engine modeling software',
+    'performance tuning',
+  ],
   authors: [{ name: 'PISTON Development Team' }],
+  creator: 'PISTON',
+  publisher: 'PISTON',
   openGraph: {
-    title: 'PISTON - Professional Engine Simulation',
-    description: 'Professional-grade engine simulation at enthusiast-accessible pricing.',
     type: 'website',
+    locale: 'en_US',
+    url: 'https://pistonsim.com',
+    siteName: 'PISTON',
+    title: 'PISTON - Professional Engine Simulation',
+    description:
+      'Professional-grade engine simulation at enthusiast-accessible pricing. Physics-based thermodynamic modeling validated against real dyno data.',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'PISTON Engine Simulation Software',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'PISTON - Professional Engine Simulation',
+    description:
+      'Professional-grade engine simulation at enthusiast-accessible pricing. <7% error rate validated against certified dyno data.',
+    images: ['/og-image.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    // Add your verification codes here when available
+    // google: 'your-google-verification-code',
+    // yandex: 'your-yandex-verification-code',
   },
 }
 
