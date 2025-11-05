@@ -1,23 +1,27 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Button from '@/components/Button'
-import { FiArrowRight } from 'react-icons/fi'
+import SectionDivider from '@/components/SectionDivider'
+import ListItem from '@/components/ListItem'
+import { fadeInUp, fadeInUpTransition, fadeIn, viewportConfig } from '@/lib/animations'
+import { FiArrowRight } from '@/lib/icons'
 
 export default function Features(): React.ReactElement {
   return (
     <>
       <Header />
-      <main className="min-h-screen pt-24">
+      <main id="main-content" className="min-h-screen pt-24">
         {/* Hero Section */}
         <section className="py-20 px-4">
           <div className="container-custom mx-auto max-w-6xl">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+            <m.div
+              variants={fadeInUp}
+              initial="initial"
+              animate="animate"
+              transition={fadeInUpTransition}
               className="text-center space-y-8 mb-20"
             >
               <h1 className="font-display font-bold text-5xl md:text-7xl text-cyan leading-[1.1] tracking-tight">
@@ -29,16 +33,16 @@ export default function Features(): React.ReactElement {
                 PISTON combines professional-grade accuracy with real-world validation to deliver
                 a simulation platform you can trust.
               </p>
-            </motion.div>
+            </m.div>
 
-            {/* Dotted Line Separator */}
-            <div className="border-t-2 border-dashed border-border my-20"></div>
+            <SectionDivider />
 
             {/* Virtual Dyno System */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
+            <m.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="animate"
+              viewport={viewportConfig}
               className="mb-20"
             >
               <h2 className="font-display font-bold text-3xl text-cyan mb-12">
@@ -51,22 +55,10 @@ export default function Features(): React.ReactElement {
                     Environmental Correction
                   </h3>
                   <ul className="space-y-2 text-text-secondary text-sm">
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>SAE J1349 standard correction</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>DIN 70020 standard correction</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Industry-standard environmental compensation</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Accurate power measurements across conditions</span>
-                    </li>
+                    <ListItem>SAE J1349 standard correction</ListItem>
+                    <ListItem>DIN 70020 standard correction</ListItem>
+                    <ListItem>Industry-standard environmental compensation</ListItem>
+                    <ListItem>Accurate power measurements across conditions</ListItem>
                   </ul>
                 </div>
 
@@ -75,22 +67,10 @@ export default function Features(): React.ReactElement {
                     Operating Modes
                   </h3>
                   <ul className="space-y-2 text-text-secondary text-sm">
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>TIME_BASED: Realistic acceleration simulation</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>STATIC: Direct calculation for validation</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Configurable inertia modeling</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Advanced loss modeling (friction + windage)</span>
-                    </li>
+                    <ListItem>TIME_BASED: Realistic acceleration simulation</ListItem>
+                    <ListItem>STATIC: Direct calculation for validation</ListItem>
+                    <ListItem>Configurable inertia modeling</ListItem>
+                    <ListItem>Advanced loss modeling (friction + windage)</ListItem>
                   </ul>
                 </div>
               </div>
@@ -111,16 +91,16 @@ export default function Features(): React.ReactElement {
                   <span className="border border-border px-3 py-1">2JZ-GTE Turbocharged</span>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
 
-            {/* Dotted Line Separator */}
-            <div className="border-t-2 border-dashed border-border my-20"></div>
+            <SectionDivider />
 
             {/* Parts Database */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
+            <m.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="animate"
+              viewport={viewportConfig}
               className="mb-20"
             >
               <h2 className="font-display font-bold text-3xl text-cyan mb-12">
@@ -165,37 +145,25 @@ export default function Features(): React.ReactElement {
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <ul className="space-y-2 text-text-secondary text-sm">
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Automatic bore spacing validation</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Valve clearance checking</span>
-                    </li>
+                    <ListItem>Automatic bore spacing validation</ListItem>
+                    <ListItem>Valve clearance checking</ListItem>
                   </ul>
                   <ul className="space-y-2 text-text-secondary text-sm">
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Physical fitment verification</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Cost-benefit analysis with pricing data</span>
-                    </li>
+                    <ListItem>Physical fitment verification</ListItem>
+                    <ListItem>Cost-benefit analysis with pricing data</ListItem>
                   </ul>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
 
-            {/* Dotted Line Separator */}
-            <div className="border-t-2 border-dashed border-border my-20"></div>
+            <SectionDivider />
 
             {/* Physics-Based Modeling */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
+            <m.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="animate"
+              viewport={viewportConfig}
               className="mb-20"
             >
               <h2 className="font-display font-bold text-3xl text-cyan mb-12">
@@ -208,22 +176,10 @@ export default function Features(): React.ReactElement {
                     Thermodynamic Engine
                   </h3>
                   <ul className="space-y-2 text-text-secondary text-sm">
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Two-zone combustion model</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Wiebe function implementation</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Heat transfer to cylinder walls</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Multiple fuel support (gasoline, E85, race gas)</span>
-                    </li>
+                    <ListItem>Two-zone combustion model</ListItem>
+                    <ListItem>Wiebe function implementation</ListItem>
+                    <ListItem>Heat transfer to cylinder walls</ListItem>
+                    <ListItem>Multiple fuel support (gasoline, E85, race gas)</ListItem>
                   </ul>
                 </div>
 
@@ -232,22 +188,10 @@ export default function Features(): React.ReactElement {
                     Mechanical Systems
                   </h3>
                   <ul className="space-y-2 text-text-secondary text-sm">
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Slider-crank kinematics</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Chen-Flynn friction modeling</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Force analysis (cylinder pressure → torque)</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Valvetrain mechanics</span>
-                    </li>
+                    <ListItem>Slider-crank kinematics</ListItem>
+                    <ListItem>Chen-Flynn friction modeling</ListItem>
+                    <ListItem>Force analysis (cylinder pressure → torque)</ListItem>
+                    <ListItem>Valvetrain mechanics</ListItem>
                   </ul>
                 </div>
               </div>
@@ -274,16 +218,16 @@ export default function Features(): React.ReactElement {
                   Professional-grade testing with comprehensive validation against real-world dyno data.
                 </p>
               </div>
-            </motion.div>
+            </m.div>
 
-            {/* Dotted Line Separator */}
-            <div className="border-t-2 border-dashed border-border my-20"></div>
+            <SectionDivider />
 
             {/* Development Roadmap */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
+            <m.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="animate"
+              viewport={viewportConfig}
               className="mb-20"
             >
               <h2 className="font-display font-bold text-3xl text-cyan mb-12">
@@ -330,16 +274,16 @@ export default function Features(): React.ReactElement {
                   </ul>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
 
-            {/* Dotted Line Separator */}
-            <div className="border-t-2 border-dashed border-border my-20"></div>
+            <SectionDivider />
 
             {/* CTA */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
+            <m.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="animate"
+              viewport={viewportConfig}
               className="text-center border-2 border-dashed border-accent-primary p-12 bg-background-secondary"
             >
               <h2 className="font-display font-bold text-4xl text-cyan mb-4 leading-[1.1]">
@@ -354,7 +298,7 @@ export default function Features(): React.ReactElement {
                   <FiArrowRight className="ml-2" />
                 </Button>
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </section>
       </main>

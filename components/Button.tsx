@@ -24,6 +24,33 @@ type ClickButtonProps = BaseButtonProps & {
 
 type ButtonProps = LinkButtonProps | ClickButtonProps
 
+/**
+ * Versatile Button component that can render as either a link or a button.
+ * Supports internal links (Next.js Link), external links, and click handlers.
+ * Provides three visual variants and three size options.
+ *
+ * @param children - Button content (text, icons, or other React nodes)
+ * @param href - URL for link buttons (internal or external)
+ * @param variant - Visual style: 'primary' (default), 'secondary', or 'ghost'
+ * @param size - Button size: 'sm', 'md' (default), or 'lg'
+ * @param external - If true, opens link in new tab with security attributes
+ * @param onClick - Click handler for button elements (mutually exclusive with href)
+ * @param className - Additional CSS classes to apply
+ *
+ * @example
+ * ```tsx
+ * // Internal link
+ * <Button href="/features">View Features</Button>
+ *
+ * // External link
+ * <Button href="https://github.com" external>GitHub</Button>
+ *
+ * // Click button
+ * <Button onClick={handleClick} variant="secondary" size="lg">
+ *   Click Me
+ * </Button>
+ * ```
+ */
 export default function Button({
   children,
   href,
@@ -33,6 +60,20 @@ export default function Button({
   onClick,
   className = '',
 }: ButtonProps): React.ReactElement {
+  // Runtime validation: ensure mutually exclusive props aren't both provided
+  if (process.env.NODE_ENV === 'development') {
+    if (href && onClick) {
+      throw new Error(
+        'Button: Cannot use both "href" and "onClick" props. Please use only one.'
+      )
+    }
+    if (external && !href) {
+      console.warn(
+        'Button: "external" prop has no effect without "href". Consider removing it.'
+      )
+    }
+  }
+
   const baseClasses = 'inline-flex items-center justify-center font-display font-semibold rounded-lg transition-all duration-250'
 
   const variantClasses = {

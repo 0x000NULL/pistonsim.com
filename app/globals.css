@@ -91,41 +91,33 @@ select:focus-visible {
 
 /* Custom Utility Classes */
 @layer utilities {
-  .text-gradient-cyan {
-    background: linear-gradient(135deg, #0693e3 0%, #00d4ff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
   .text-cyan {
     color: var(--accent-primary);
-  }
-
-  .glow-cyan {
-    box-shadow: 0 0 30px rgba(6, 147, 227, 0.3);
-  }
-
-  .border-glow-cyan {
-    border: 1px solid var(--accent-primary);
-    box-shadow: 0 0 20px rgba(6, 147, 227, 0.2);
-  }
-
-  .border-dotted {
-    border-style: dotted;
   }
 
   .border-dashed {
     border-style: dashed;
   }
 
-  .card-dotted {
-    border: 2px dashed var(--border);
-    transition: border-color 0.3s ease;
+  /* Animation performance hints */
+  .will-change-transform-opacity {
+    will-change: transform, opacity;
   }
 
-  .card-dotted:hover {
-    border-color: var(--accent-primary);
+  .will-change-auto {
+    will-change: auto;
+  }
+
+  /* Apply to animated elements for GPU acceleration */
+  .animate-gpu {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /* Remove will-change after animation completes */
+  .animate-done {
+    will-change: auto;
   }
 }
 
@@ -176,9 +168,19 @@ select:focus-visible {
     transition: border-color 0.2s ease;
     padding: 2rem;
     background-color: var(--bg-secondary);
+    contain: layout style paint;
   }
 
   .feature-card-border:hover {
     border-color: var(--accent-primary);
+  }
+
+  /* CSS containment for isolated components - improves rendering performance */
+  .metric-card {
+    contain: layout style paint;
+  }
+
+  .section-isolated {
+    contain: layout style;
   }
 }

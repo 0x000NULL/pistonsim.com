@@ -1,26 +1,63 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import Button from '@/components/Button'
+import { fadeInUp, fadeInUpTransition } from '@/lib/animations'
 
 interface ErrorProps {
-  error: Error & { digest?: string }
+  error: globalThis.Error & {
+    digest?: string
+    cause?: unknown
+  }
   reset: () => void
 }
 
-export default function Error({ error, reset }: ErrorProps): React.ReactElement {
+/**
+ * Validates that the error object is a proper Error instance
+ * @param error - The error to validate
+ * @returns The validated error
+ */
+function validateError(error: unknown): globalThis.Error & { digest?: string; cause?: unknown } {
+  // If it's not an Error instance, create a proper Error
+  if (!(error instanceof globalThis.Error)) {
+    console.error('Invalid error type received:', error)
+    const errorMessage = typeof error === 'string' ? error : 'An unknown error occurred'
+    // Create a basic Error using the global Error constructor
+    const basicError = new globalThis.Error(errorMessage)
+    return Object.assign(basicError, {
+      digest: undefined,
+      cause: error
+    })
+  }
+
+  return error as globalThis.Error & { digest?: string; cause?: unknown }
+}
+
+export default function Error({ error: rawError, reset }: ErrorProps): React.ReactElement {
+  // Validate and normalize the error
+  const error = validateError(rawError)
+
   React.useEffect(() => {
     // Log error to error reporting service
     console.error('Application error:', error)
+
+    // Log additional error information if available
+    if (error.digest) {
+      console.error('Error digest:', error.digest)
+    }
+    if (error.cause) {
+      console.error('Error cause:', error.cause)
+    }
   }, [error])
 
   return (
     <div className="min-h-screen bg-background-primary flex items-center justify-center px-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+      <m.div
+        variants={fadeInUp}
+        initial="initial"
+        animate="animate"
+        transition={fadeInUpTransition}
         className="max-w-md w-full text-center"
       >
         <h1 className="font-display text-4xl md:text-5xl font-bold text-accent-primary mb-4">
@@ -48,7 +85,7 @@ export default function Error({ error, reset }: ErrorProps): React.ReactElement 
             </pre>
           </details>
         )}
-      </motion.div>
+      </m.div>
     </div>
   )
 }

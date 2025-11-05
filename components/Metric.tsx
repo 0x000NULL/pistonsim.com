@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { memo } from 'react'
+import { m } from 'framer-motion'
 
 interface MetricProps {
   value: string | number
@@ -10,7 +11,24 @@ interface MetricProps {
   className?: string
 }
 
-export default function Metric({ value, label, suffix = '', color = 'red', className = '' }: MetricProps): React.ReactElement {
+/**
+ * Metric component displays a statistic or KPI with animation.
+ * Features a large value with optional suffix and descriptive label.
+ * Animates in when scrolled into view.
+ *
+ * @param value - The metric value (number or string)
+ * @param label - Descriptive label for the metric
+ * @param suffix - Optional suffix (e.g., '%', '+', 'ms')
+ * @param color - Color theme: 'red' (default), 'blue', 'green', or 'orange'
+ * @param className - Optional additional CSS classes
+ *
+ * @example
+ * ```tsx
+ * <Metric value="<7" suffix="%" label="Target Error" color="red" />
+ * <Metric value={222} label="Tests Passing" color="green" />
+ * ```
+ */
+const Metric = memo(function Metric({ value, label, suffix = '', color = 'red', className = '' }: MetricProps): React.ReactElement {
   const colorClasses = {
     red: 'text-accent-primary',
     blue: 'text-accent-secondary',
@@ -19,7 +37,7 @@ export default function Metric({ value, label, suffix = '', color = 'red', class
   }
 
   return (
-    <motion.div
+    <m.div
       className={`text-center ${className}`}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -32,6 +50,8 @@ export default function Metric({ value, label, suffix = '', color = 'red', class
       <div className="text-text-secondary text-sm md:text-base font-medium">
         {label}
       </div>
-    </motion.div>
+    </m.div>
   )
-}
+})
+
+export default Metric

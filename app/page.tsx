@@ -1,24 +1,28 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Button from '@/components/Button'
 import FeatureCard from '@/components/FeatureCard'
-import { FiActivity, FiDatabase, FiCpu, FiArrowRight } from 'react-icons/fi'
+import SectionDivider from '@/components/SectionDivider'
+import ListItem from '@/components/ListItem'
+import { fadeInUp, fadeInUpTransition, fadeIn, viewportConfig } from '@/lib/animations'
+import { FiActivity, FiDatabase, FiCpu, FiArrowRight } from '@/lib/icons'
 
 export default function Home(): React.ReactElement {
   return (
     <>
       <Header />
-      <main className="min-h-screen">
+      <main id="main-content" className="min-h-screen">
         {/* Hero Section */}
         <section className="pt-32 pb-20 px-4">
           <div className="container-custom mx-auto max-w-6xl">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+            <m.div
+              variants={fadeInUp}
+              initial="initial"
+              animate="animate"
+              transition={fadeInUpTransition}
               className="text-center space-y-8 mb-20"
             >
               {/* Headline */}
@@ -41,17 +45,17 @@ export default function Home(): React.ReactElement {
                   <FiArrowRight className="ml-2" />
                 </Button>
               </div>
-            </motion.div>
+            </m.div>
 
-            {/* Dotted Line Separator */}
-            <div className="border-t-2 border-dashed border-border my-20"></div>
+            <SectionDivider />
 
             {/* Metrics Grid */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+            <m.div
+              variants={fadeInUp}
+              initial="initial"
+              whileInView="animate"
+              viewport={viewportConfig}
+              transition={fadeInUpTransition}
               className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20"
             >
               <div className="border-2 border-dashed border-border hover:border-accent-primary transition-colors p-6 text-center">
@@ -70,17 +74,16 @@ export default function Home(): React.ReactElement {
                 <div className="font-mono text-4xl font-bold text-cyan mb-2">50+</div>
                 <div className="text-text-secondary text-sm">Real Parts</div>
               </div>
-            </motion.div>
+            </m.div>
 
-            {/* Dotted Line Separator */}
-            <div className="border-t-2 border-dashed border-border my-20"></div>
+            <SectionDivider />
 
             {/* Features Grid */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+            <m.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="animate"
+              viewport={viewportConfig}
               className="mb-20"
             >
               <h2 className="font-display font-bold text-3xl text-cyan mb-12 text-center">
@@ -104,17 +107,16 @@ export default function Home(): React.ReactElement {
                   description="First-principles thermodynamics using the same methods as $10,000+ professional software like GT-POWER and Ricardo WAVE."
                 />
               </div>
-            </motion.div>
+            </m.div>
 
-            {/* Dotted Line Separator */}
-            <div className="border-t-2 border-dashed border-border my-20"></div>
+            <SectionDivider />
 
             {/* Technical Details Section */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+            <m.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="animate"
+              viewport={viewportConfig}
               className="mb-20"
             >
               <h2 className="font-display font-bold text-3xl text-cyan mb-12 text-center">
@@ -128,22 +130,10 @@ export default function Home(): React.ReactElement {
                     Thermodynamic Engine
                   </h3>
                   <ul className="space-y-2 text-text-secondary text-sm">
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Two-zone combustion with Wiebe function</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Heat transfer to cylinder walls</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Multiple fuel support (gasoline, E85, race gas)</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Otto cycle implementation</span>
-                    </li>
+                    <ListItem>Two-zone combustion with Wiebe function</ListItem>
+                    <ListItem>Heat transfer to cylinder walls</ListItem>
+                    <ListItem>Multiple fuel support (gasoline, E85, race gas)</ListItem>
+                    <ListItem>Otto cycle implementation</ListItem>
                   </ul>
                 </div>
 
@@ -153,36 +143,23 @@ export default function Home(): React.ReactElement {
                     Mechanical Systems
                   </h3>
                   <ul className="space-y-2 text-text-secondary text-sm">
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Slider-crank kinematics and force analysis</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Chen-Flynn friction modeling</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Reciprocating mass inertia forces</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Valvetrain mechanics and cam profiles</span>
-                    </li>
+                    <ListItem>Slider-crank kinematics and force analysis</ListItem>
+                    <ListItem>Chen-Flynn friction modeling</ListItem>
+                    <ListItem>Reciprocating mass inertia forces</ListItem>
+                    <ListItem>Valvetrain mechanics and cam profiles</ListItem>
                   </ul>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
 
-            {/* Dotted Line Separator */}
-            <div className="border-t-2 border-dashed border-border my-20"></div>
+            <SectionDivider />
 
             {/* Roadmap Section */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+            <m.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="animate"
+              viewport={viewportConfig}
               className="mb-20"
             >
               <h2 className="font-display font-bold text-3xl text-cyan mb-12 text-center">
@@ -229,17 +206,16 @@ export default function Home(): React.ReactElement {
                   </ul>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
 
-            {/* Dotted Line Separator */}
-            <div className="border-t-2 border-dashed border-border my-20"></div>
+            <SectionDivider />
 
             {/* Final CTA */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+            <m.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="animate"
+              viewport={viewportConfig}
               className="text-center border-2 border-dashed border-accent-primary p-12 bg-background-secondary"
             >
               <h2 className="font-display font-bold text-4xl text-cyan mb-4 leading-[1.1]">
@@ -254,7 +230,7 @@ export default function Home(): React.ReactElement {
                   <FiArrowRight className="ml-2" />
                 </Button>
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </section>
       </main>

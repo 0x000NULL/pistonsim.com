@@ -1,5 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
+import ErrorBoundary from '@/components/ErrorBoundary'
+import SkipLink from '@/components/SkipLink'
+import MotionProvider from '@/components/MotionProvider'
+import '@/lib/polyfills'
 import './globals.css'
 
 const inter = Inter({
@@ -34,8 +38,15 @@ export default function RootLayout({
 }>): React.ReactElement {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body className="antialiased">
-        {children}
+        <SkipLink />
+        <MotionProvider>
+          <ErrorBoundary>{children}</ErrorBoundary>
+        </MotionProvider>
       </body>
     </html>
   )

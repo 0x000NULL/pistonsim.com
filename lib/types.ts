@@ -19,13 +19,6 @@ export interface MetricData {
   label: string
 }
 
-// Animation configurations
-export interface AnimationConfig {
-  initial: { opacity: number; y: number }
-  animate: { opacity: number; y: number }
-  transition: { duration: number; delay?: number }
-}
-
 // Route constants
 export const ROUTES = {
   HOME: '/',
