@@ -1,28 +1,38 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import { ReactNode } from 'react'
 
-interface ButtonProps {
-  href?: string
-  onClick?: () => void
+type BaseButtonProps = {
   children: ReactNode
   variant?: 'primary' | 'secondary' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
   className?: string
-  external?: boolean
 }
 
-const Button = ({
-  href,
-  onClick,
+type LinkButtonProps = BaseButtonProps & {
+  href: string
+  external?: boolean
+  onClick?: never
+}
+
+type ClickButtonProps = BaseButtonProps & {
+  onClick: () => void
+  href?: never
+  external?: never
+}
+
+type ButtonProps = LinkButtonProps | ClickButtonProps
+
+export default function Button({
   children,
+  href,
   variant = 'primary',
   size = 'md',
+  external = false,
+  onClick,
   className = '',
-  external = false
-}: ButtonProps) => {
+}: ButtonProps): React.ReactElement {
   const baseClasses = 'inline-flex items-center justify-center font-display font-semibold rounded-lg transition-all duration-250'
 
   const variantClasses = {
@@ -69,5 +79,3 @@ const Button = ({
     </button>
   )
 }
-
-export default Button

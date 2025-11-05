@@ -7,7 +7,7 @@ import Button from '@/components/Button'
 import FeatureCard from '@/components/FeatureCard'
 import { FiActivity, FiDatabase, FiCpu, FiArrowRight } from 'react-icons/fi'
 
-export default function Home() {
+export default function Home(): React.ReactElement {
   return (
     <>
       <Header />

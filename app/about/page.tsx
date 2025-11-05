@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
-export default function About() {
+export default function About(): React.ReactElement {
   return (
     <>
       <Header />
@@ -48,7 +48,7 @@ export default function About() {
                 <p className="text-text-secondary text-lg mb-6">
                   Professional engine simulation software like GT-POWER and Ricardo WAVE
                   delivers exceptional accuracy through first-principles thermodynamics.
-                  But there's a catch: they cost <span className="text-cyan font-semibold">$10,000+</span> per license.
+                  But there&apos;s a catch: they cost <span className="text-cyan font-semibold">$10,000+</span> per license.
                 </p>
                 <p className="text-text-secondary text-lg mb-6">
                   This pricing puts accurate engine modeling completely out of reach for:
@@ -102,7 +102,7 @@ export default function About() {
                   <p className="text-text-secondary">
                     PISTON brings the same first-principles thermodynamic modeling used in
                     $10,000+ professional software to an accessible price point. We believe
-                    accurate engine simulation shouldn't require a corporate budget.
+                    accurate engine simulation shouldn&apos;t require a corporate budget.
                   </p>
                 </div>
 
@@ -125,7 +125,7 @@ export default function About() {
                 <p className="text-text-secondary mb-4">
                   When you can simulate before you buy, you make better decisions. You avoid
                   expensive mistakes. You optimize combinations. You understand why modifications
-                  work—or don't work—before spending thousands on parts.
+                  work—or don&apos;t work—before spending thousands on parts.
                 </p>
                 <p className="text-text-secondary">
                   PISTON empowers builders, tuners, and enthusiasts to approach engine development
