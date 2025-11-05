@@ -1,21 +1,25 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import SectionDivider from '@/components/SectionDivider'
+import ListItem from '@/components/ListItem'
+import { fadeInUp, fadeInUpTransition, fadeIn, viewportConfig } from '@/lib/animations'
 
 export default function About(): React.ReactElement {
   return (
     <>
       <Header />
-      <main className="min-h-screen pt-24">
+      <main id="main-content" className="min-h-screen pt-24">
         {/* Hero Section */}
         <section className="py-20 px-4">
           <div className="container-custom mx-auto max-w-6xl">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+            <m.div
+              variants={fadeInUp}
+              initial="initial"
+              animate="animate"
+              transition={fadeInUpTransition}
               className="text-center space-y-8 mb-20"
             >
               <h1 className="font-display font-bold text-5xl md:text-7xl text-cyan leading-[1.1] tracking-tight">
@@ -27,17 +31,16 @@ export default function About(): React.ReactElement {
                 Breaking down the cost barrier that keeps advanced engine simulation
                 out of reach for builders, tuners, and enthusiasts.
               </p>
-            </motion.div>
+            </m.div>
 
-            {/* Dotted Line Separator */}
-            <div className="border-t-2 border-dashed border-border my-20"></div>
+            <SectionDivider />
 
             {/* The Problem */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+            <m.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="animate"
+              viewport={viewportConfig}
               className="mb-20"
             >
               <h2 className="font-display font-bold text-3xl text-cyan mb-12">
@@ -54,22 +57,10 @@ export default function About(): React.ReactElement {
                   This pricing puts accurate engine modeling completely out of reach for:
                 </p>
                 <ul className="space-y-3 text-text-secondary text-lg mb-6">
-                  <li className="flex items-start">
-                    <span className="text-cyan mr-3 mt-1">→</span>
-                    <span>Independent engine builders and tuning shops</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-cyan mr-3 mt-1">→</span>
-                    <span>Automotive enthusiasts working on project cars</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-cyan mr-3 mt-1">→</span>
-                    <span>Students and researchers without institutional licenses</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-cyan mr-3 mt-1">→</span>
-                    <span>Small racing teams on tight budgets</span>
-                  </li>
+                  <ListItem className="mr-1">Independent engine builders and tuning shops</ListItem>
+                  <ListItem className="mr-1">Automotive enthusiasts working on project cars</ListItem>
+                  <ListItem className="mr-1">Students and researchers without institutional licenses</ListItem>
+                  <ListItem className="mr-1">Small racing teams on tight budgets</ListItem>
                 </ul>
                 <p className="text-text-secondary text-lg">
                   The result? Most builders are forced to use either oversimplified online
@@ -77,17 +68,16 @@ export default function About(): React.ReactElement {
                   delivers the insight needed to make informed decisions.
                 </p>
               </div>
-            </motion.div>
+            </m.div>
 
-            {/* Dotted Line Separator */}
-            <div className="border-t-2 border-dashed border-border my-20"></div>
+            <SectionDivider />
 
             {/* Mission & Vision */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+            <m.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="animate"
+              viewport={viewportConfig}
               className="mb-20"
             >
               <h2 className="font-display font-bold text-3xl text-cyan mb-12">
@@ -132,17 +122,16 @@ export default function About(): React.ReactElement {
                   with the same tools and confidence that professional engineers have enjoyed for decades.
                 </p>
               </div>
-            </motion.div>
+            </m.div>
 
-            {/* Dotted Line Separator */}
-            <div className="border-t-2 border-dashed border-border my-20"></div>
+            <SectionDivider />
 
             {/* About the Project */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+            <m.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="animate"
+              viewport={viewportConfig}
               className="mb-20"
             >
               <h2 className="font-display font-bold text-3xl text-cyan mb-12">
@@ -168,17 +157,16 @@ export default function About(): React.ReactElement {
                   plug numbers into a black box.
                 </p>
               </div>
-            </motion.div>
+            </m.div>
 
-            {/* Dotted Line Separator */}
-            <div className="border-t-2 border-dashed border-border my-20"></div>
+            <SectionDivider />
 
             {/* Roadmap */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+            <m.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="animate"
+              viewport={viewportConfig}
               className="mb-20"
             >
               <h2 className="font-display font-bold text-3xl text-cyan mb-12">
@@ -192,26 +180,11 @@ export default function About(): React.ReactElement {
                     Technical Milestones
                   </h3>
                   <ul className="space-y-3 text-text-secondary">
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Forced induction modeling (turbo & supercharger)</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>ECU simulation for fuel, ignition, and boost control</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Advanced combustion models and knock prediction</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Transmission and drivetrain modeling</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Component failure prediction</span>
-                    </li>
+                    <ListItem>Forced induction modeling (turbo & supercharger)</ListItem>
+                    <ListItem>ECU simulation for fuel, ignition, and boost control</ListItem>
+                    <ListItem>Advanced combustion models and knock prediction</ListItem>
+                    <ListItem>Transmission and drivetrain modeling</ListItem>
+                    <ListItem>Component failure prediction</ListItem>
                   </ul>
                 </div>
 
@@ -221,26 +194,11 @@ export default function About(): React.ReactElement {
                     Validation & Accuracy
                   </h3>
                   <ul className="space-y-3 text-text-secondary">
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Continuous validation against certified dyno data</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Expanding test coverage across more engine families</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Real-world case studies and validation reports</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Community-contributed dyno comparisons</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Transparent accuracy metrics and error reporting</span>
-                    </li>
+                    <ListItem>Continuous validation against certified dyno data</ListItem>
+                    <ListItem>Expanding test coverage across more engine families</ListItem>
+                    <ListItem>Real-world case studies and validation reports</ListItem>
+                    <ListItem>Community-contributed dyno comparisons</ListItem>
+                    <ListItem>Transparent accuracy metrics and error reporting</ListItem>
                   </ul>
                 </div>
 
@@ -250,26 +208,11 @@ export default function About(): React.ReactElement {
                     Commercial Viability
                   </h3>
                   <ul className="space-y-3 text-text-secondary">
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Sustainable pricing model for long-term development</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Professional licensing options for shops and businesses</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Free tier for enthusiasts and students</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Premium features and priority support packages</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-cyan mr-2 mt-1">→</span>
-                      <span>Path to full-time development and support</span>
-                    </li>
+                    <ListItem>Sustainable pricing model for long-term development</ListItem>
+                    <ListItem>Professional licensing options for shops and businesses</ListItem>
+                    <ListItem>Free tier for enthusiasts and students</ListItem>
+                    <ListItem>Premium features and priority support packages</ListItem>
+                    <ListItem>Path to full-time development and support</ListItem>
                   </ul>
                 </div>
               </div>
@@ -285,7 +228,7 @@ export default function About(): React.ReactElement {
                   accessibility, transparency, and professional-grade accuracy.
                 </p>
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </section>
       </main>

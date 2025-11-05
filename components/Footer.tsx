@@ -1,10 +1,11 @@
 'use client'
 
+import { useMemo } from 'react'
 import Link from 'next/link'
 import { NavLink, ROUTES } from '@/lib/types'
 
 export default function Footer(): React.ReactElement {
-  const currentYear = new Date().getFullYear()
+  const currentYear = useMemo(() => new Date().getFullYear(), [])
 
   const footerLinks: {
     product: NavLink[]
