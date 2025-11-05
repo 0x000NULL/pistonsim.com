@@ -32,6 +32,12 @@ export {
   FiArrowRight,
   FiMenu,
   FiX,
+  FiMail,
+  FiSend,
+  FiCheck,
+  FiAlertTriangle,
+  FiChevronDown,
+  FiChevronUp,
 } from 'react-icons/fi'
 
 // Type for icon components

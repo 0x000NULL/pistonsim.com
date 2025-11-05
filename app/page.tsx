@@ -7,6 +7,7 @@ import Button from '@/components/Button'
 import FeatureCard from '@/components/FeatureCard'
 import SectionDivider from '@/components/SectionDivider'
 import ListItem from '@/components/ListItem'
+import NewsletterForm from '@/components/NewsletterForm'
 import { fadeInUp, fadeInUpTransition, fadeIn, viewportConfig } from '@/lib/animations'
 import { FiActivity, FiDatabase, FiCpu, FiArrowRight } from '@/lib/icons'
 
@@ -154,6 +155,59 @@ export default function Home(): React.ReactElement {
 
             <SectionDivider />
 
+            {/* Trust Indicators Section */}
+            <m.div
+              variants={fadeIn}
+              initial="initial"
+              whileInView="animate"
+              viewport={viewportConfig}
+              className="mb-20"
+            >
+              <h2 className="font-display font-bold text-3xl text-cyan mb-12 text-center">
+                BUILT ON PROVEN SCIENCE
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="border-2 border-dashed border-accent-primary p-8 bg-background-secondary text-center">
+                  <div className="font-mono text-5xl font-bold text-cyan mb-3">
+                    {'<7%'}
+                  </div>
+                  <h3 className="font-display font-semibold text-lg text-text-primary mb-2">
+                    Validated Accuracy
+                  </h3>
+                  <p className="text-text-secondary text-sm">
+                    Less than 7% error rate when tested against certified GM dyno data across multiple configurations
+                  </p>
+                </div>
+
+                <div className="border-2 border-dashed border-accent-primary p-8 bg-background-secondary text-center">
+                  <div className="font-mono text-5xl font-bold text-cyan mb-3">
+                    LS3 + LSA
+                  </div>
+                  <h3 className="font-display font-semibold text-lg text-text-primary mb-2">
+                    Real Engine Data
+                  </h3>
+                  <p className="text-text-secondary text-sm">
+                    Validated against LS3 6.2L V8 and LSA 6.2L supercharged engines using certified dynamometer results
+                  </p>
+                </div>
+
+                <div className="border-2 border-dashed border-accent-primary p-8 bg-background-secondary text-center">
+                  <div className="font-mono text-5xl font-bold text-cyan mb-3">
+                    222
+                  </div>
+                  <h3 className="font-display font-semibold text-lg text-text-primary mb-2">
+                    Tests Passing
+                  </h3>
+                  <p className="text-text-secondary text-sm">
+                    Comprehensive test suite with 19,071 assertions ensuring consistent accuracy and reliability
+                  </p>
+                </div>
+              </div>
+            </m.div>
+
+            <SectionDivider />
+
             {/* Roadmap Section */}
             <m.div
               variants={fadeIn}
@@ -224,11 +278,22 @@ export default function Home(): React.ReactElement {
               <p className="text-text-secondary text-lg mb-8 max-w-2xl mx-auto">
                 Free alpha release. Built for engineers and enthusiasts.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
                 <Button href="/features/" size="lg">
                   Learn More
                   <FiArrowRight className="ml-2" />
                 </Button>
+              </div>
+
+              {/* Newsletter Signup */}
+              <div className="max-w-md mx-auto pt-8 border-t-2 border-dashed border-border">
+                <h3 className="font-display font-semibold text-xl text-text-primary mb-3">
+                  Stay Updated
+                </h3>
+                <p className="text-text-secondary text-sm mb-6">
+                  Get notified about new features, releases, and updates.
+                </p>
+                <NewsletterForm variant="inline" placeholder="Enter your email" />
               </div>
             </m.div>
           </div>

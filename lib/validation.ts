@@ -88,6 +88,55 @@ export function sanitizeHtml(value: string): string {
 }
 
 /**
+ * Enhanced email validation with RFC 5322 compliance
+ * and additional checks for common errors
+ *
+ * @param email - Email address to validate
+ * @returns Validation result with error message if invalid
+ */
+export function validateNewsletterEmail(email: string): { isValid: boolean; error: string | null } {
+  const trimmed = email.trim()
+
+  // Check if empty
+  if (!isRequired(trimmed)) {
+    return { isValid: false, error: 'Email address is required' }
+  }
+
+  // Check length constraints
+  if (!hasMaxLength(trimmed, 254)) {
+    return { isValid: false, error: 'Email address is too long' }
+  }
+
+  // Enhanced RFC 5322 compliant regex
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+
+  if (!emailRegex.test(trimmed)) {
+    return { isValid: false, error: 'Please enter a valid email address' }
+  }
+
+  // Additional checks
+  const [_localPart, domain] = trimmed.split('@')
+
+  // Check for consecutive dots
+  if (trimmed.includes('..')) {
+    return { isValid: false, error: 'Email address contains invalid characters' }
+  }
+
+  // Check domain has at least one dot
+  if (!domain || !domain.includes('.')) {
+    return { isValid: false, error: 'Please enter a valid domain' }
+  }
+
+  // Check for common typos in popular domains
+  const commonTypos = ['gmial.com', 'gmai.com', 'yahooo.com', 'hotmial.com']
+  if (commonTypos.includes(domain.toLowerCase())) {
+    return { isValid: false, error: 'Did you mean gmail.com, yahoo.com, or hotmail.com?' }
+  }
+
+  return { isValid: true, error: null }
+}
+
+/**
  * Composite validation result
  */
 export interface ValidationResult {
