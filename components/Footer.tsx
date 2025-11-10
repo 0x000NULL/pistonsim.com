@@ -16,11 +16,12 @@ export default function Footer(): React.ReactElement {
     product: [
       { href: ROUTES.HOME, label: 'Home' },
       { href: ROUTES.FEATURES, label: 'Features' },
+      { href: ROUTES.DOWNLOAD, label: 'Download' },
       { href: ROUTES.FAQ, label: 'FAQ' },
     ],
     company: [
       { href: ROUTES.ABOUT, label: 'About' },
-      { href: '/#contact', label: 'Contact' },
+      { href: ROUTES.CONTACT, label: 'Contact' },
     ],
     legal: [
       { href: ROUTES.TERMS, label: 'Terms of Service' },
