@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import Link from 'next/link'
+import Breadcrumb from '@/components/Breadcrumb'
 import { ROUTES } from '@/lib/types'
 
 interface LegalLayoutProps {
@@ -13,7 +14,7 @@ interface LegalLayoutProps {
  *
  * Features:
  * - Standardized header with title and last updated date
- * - Breadcrumb navigation
+ * - Breadcrumb navigation with structured data
  * - Readable typography and spacing
  * - Print-friendly styling
  *
@@ -30,22 +31,13 @@ export default function LegalLayout({
     <main className="min-h-screen bg-background py-24 px-6">
       <div className="container-custom mx-auto max-w-4xl">
         {/* Breadcrumb */}
-        <nav className="mb-8" aria-label="Breadcrumb">
-          <ol className="flex items-center gap-2 text-sm text-text-secondary">
-            <li>
-              <Link
-                href={ROUTES.HOME}
-                className="hover:text-text-primary transition-colors"
-              >
-                Home
-              </Link>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li aria-current="page" className="text-text-primary">
-              {title}
-            </li>
-          </ol>
-        </nav>
+        <Breadcrumb
+          items={[
+            { label: 'Home', href: ROUTES.HOME },
+            { label: title },
+          ]}
+          className="mb-8"
+        />
 
         {/* Header */}
         <header className="mb-12">

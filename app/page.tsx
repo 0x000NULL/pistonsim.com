@@ -8,12 +8,16 @@ import FeatureCard from '@/components/FeatureCard'
 import SectionDivider from '@/components/SectionDivider'
 import ListItem from '@/components/ListItem'
 import NewsletterForm from '@/components/NewsletterForm'
+import StructuredData from '@/components/StructuredData'
 import { fadeInUp, fadeInUpTransition, fadeIn, viewportConfig } from '@/lib/animations'
 import { FiActivity, FiDatabase, FiCpu, FiArrowRight } from '@/lib/icons'
+import { getSoftwareApplicationSchema, getWebSiteSchema } from '@/lib/structuredData'
 
 export default function Home(): React.ReactElement {
   return (
     <>
+      <StructuredData data={getSoftwareApplicationSchema()} />
+      <StructuredData data={getWebSiteSchema()} />
       <Header />
       <main id="main-content" className="min-h-screen">
         {/* Hero Section */}

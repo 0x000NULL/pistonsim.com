@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, FormEvent } from 'react'
+import { useState, useCallback, useEffect, FormEvent } from 'react'
 import { validateNewsletterEmail } from '@/lib/validation'
 import { subscribeToNewsletter, checkRateLimit, recordSubmitAttempt } from '@/lib/newsletter'
 import { NewsletterFormState } from '@/lib/types'
@@ -95,6 +95,22 @@ export default function NewsletterForm({
       isSuccess: false,
     }))
   }, [])
+
+  // Real-time validation with debouncing
+  useEffect(() => {
+    if (!formState.email || formState.isSubmitting || formState.isSuccess) {
+      return
+    }
+
+    const timeoutId = setTimeout(() => {
+      const validation = validateNewsletterEmail(formState.email)
+      if (!validation.isValid && formState.email.length > 0) {
+        setFormState((prev) => ({ ...prev, error: validation.error }))
+      }
+    }, 800) // Debounce for 800ms
+
+    return () => clearTimeout(timeoutId)
+  }, [formState.email, formState.isSubmitting, formState.isSuccess])
 
   const isFooter = variant === 'footer'
 
