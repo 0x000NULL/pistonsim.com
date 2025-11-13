@@ -4,6 +4,15 @@ import LegalLayout from '@/components/LegalLayout'
 export const metadata: Metadata = {
   title: 'License Agreement',
   description: 'End User License Agreement (EULA) for PISTON engine simulation software',
+  openGraph: {
+    title: 'License Agreement - PISTON',
+    description: 'EULA for PISTON engine simulation software',
+    url: 'https://pistonsim.com/license/',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://pistonsim.com/license/',
+  },
 }
 
 export default function LicensePage(): React.ReactElement {

@@ -4,6 +4,15 @@ import LegalLayout from '@/components/LegalLayout'
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description: 'Privacy Policy for PISTON engine simulation software',
+  openGraph: {
+    title: 'Privacy Policy - PISTON',
+    description: 'How PISTON protects your data and privacy',
+    url: 'https://pistonsim.com/privacy/',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://pistonsim.com/privacy/',
+  },
 }
 
 export default function PrivacyPage(): React.ReactElement {

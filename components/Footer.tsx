@@ -5,6 +5,27 @@ import Link from 'next/link'
 import { NavLink, ROUTES } from '@/lib/types'
 import NewsletterForm from '@/components/NewsletterForm'
 
+/**
+ * Site footer with navigation, newsletter signup, and legal links
+ *
+ * Features:
+ * - Multi-column responsive layout (stacks on mobile)
+ * - Organized link sections: Product, Company, Legal
+ * - Integrated newsletter subscription form
+ * - Copyright notice with dynamic year
+ * - Consistent styling with dashed borders (brand element)
+ * - Semantic HTML structure
+ *
+ * The footer provides important secondary navigation and
+ * encourages newsletter signups without being intrusive.
+ *
+ * @returns Footer component with navigation and newsletter form
+ *
+ * @example
+ * ```tsx
+ * <Footer />
+ * ```
+ */
 export default function Footer(): React.ReactElement {
   const currentYear = useMemo(() => new Date().getFullYear(), [])
 

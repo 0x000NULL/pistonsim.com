@@ -4,6 +4,15 @@ import LegalLayout from '@/components/LegalLayout'
 export const metadata: Metadata = {
   title: 'Terms of Service',
   description: 'Terms of Service for PISTON engine simulation software',
+  openGraph: {
+    title: 'Terms of Service - PISTON',
+    description: 'Legal terms for PISTON engine simulation software',
+    url: 'https://pistonsim.com/terms/',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://pistonsim.com/terms/',
+  },
 }
 
 export default function TermsPage(): React.ReactElement {
