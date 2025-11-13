@@ -6,12 +6,15 @@ import Footer from '@/components/Footer'
 import SectionDivider from '@/components/SectionDivider'
 import ListItem from '@/components/ListItem'
 import NewsletterForm from '@/components/NewsletterForm'
+import StructuredData from '@/components/StructuredData'
 import { fadeInUp, fadeInUpTransition, fadeIn, viewportConfig } from '@/lib/animations'
 import { FiMail } from '@/lib/icons'
+import { getOrganizationSchema } from '@/lib/structuredData'
 
 export default function About(): React.ReactElement {
   return (
     <>
+      <StructuredData data={getOrganizationSchema()} />
       <Header />
       <main id="main-content" className="min-h-screen pt-24">
         {/* Hero Section */}

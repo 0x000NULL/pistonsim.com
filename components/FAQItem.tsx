@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { m, AnimatePresence } from 'framer-motion'
 import { FiChevronDown } from '@/lib/icons'
 
@@ -23,7 +23,7 @@ interface FAQItemProps {
  * @param answer - The answer text
  * @param defaultOpen - Whether the item starts expanded
  */
-export default function FAQItem({
+const FAQItem = memo(function FAQItem({
   question,
   answer,
   defaultOpen = false,
@@ -82,4 +82,6 @@ export default function FAQItem({
       </AnimatePresence>
     </div>
   )
-}
+})
+
+export default FAQItem

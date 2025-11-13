@@ -7,12 +7,15 @@ import Button from '@/components/Button'
 import SectionDivider from '@/components/SectionDivider'
 import ListItem from '@/components/ListItem'
 import NewsletterForm from '@/components/NewsletterForm'
+import StructuredData from '@/components/StructuredData'
 import { fadeInUp, fadeInUpTransition, fadeIn, viewportConfig } from '@/lib/animations'
 import { FiArrowRight } from '@/lib/icons'
+import { getProductSchema } from '@/lib/structuredData'
 
 export default function Features(): React.ReactElement {
   return (
     <>
+      <StructuredData data={getProductSchema()} />
       <Header />
       <main id="main-content" className="min-h-screen pt-24">
         {/* Hero Section */}

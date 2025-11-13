@@ -3,6 +3,28 @@
 import React from 'react';
 import { FaWindows, FaApple, FaLinux, FaDownload } from 'react-icons/fa';
 
+/**
+ * Platform-specific download button with icon and version display
+ *
+ * Features:
+ * - Platform icons (Windows, macOS, Linux)
+ * - Optional version number display
+ * - Disabled state support
+ * - Hover animations (scale + color)
+ * - Accessible with ARIA labels
+ *
+ * @param platform - Target platform: 'windows', 'macos', 'linux', or 'all'
+ * @param version - Optional software version to display
+ * @param size - Button size: 'sm', 'md' (default), or 'lg'
+ * @param variant - Visual style: 'primary' (cyan) or 'secondary' (outlined)
+ * @param disabled - If true, button is non-interactive
+ *
+ * @example
+ * ```tsx
+ * <DownloadButton platform="windows" version="1.0.0" size="lg" />
+ * <DownloadButton platform="macos" variant="secondary" />
+ * ```
+ */
 interface DownloadButtonProps {
   platform: 'windows' | 'macos' | 'linux' | 'all';
   version?: string;
