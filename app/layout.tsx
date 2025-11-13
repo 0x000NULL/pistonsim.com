@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from 'next/font/google'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import SkipLink from '@/components/SkipLink'
 import MotionProvider from '@/components/MotionProvider'
+import WebVitals from '@/components/WebVitals'
 import '@/lib/polyfills'
 import './globals.css'
 
@@ -98,6 +99,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="antialiased">
+        <WebVitals />
         <SkipLink />
         <MotionProvider>
           <ErrorBoundary>{children}</ErrorBoundary>

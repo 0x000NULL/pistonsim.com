@@ -1,0 +1,10 @@
+# Security Contact Information for PISTON
+# https://securitytxt.org/
+
+Contact: mailto:security@pistonsim.com
+Expires: 2026-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://pistonsim.com/.well-known/security.txt
+
+# Please report security vulnerabilities responsibly
+# We appreciate researchers who follow responsible disclosure practices

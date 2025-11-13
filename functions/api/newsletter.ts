@@ -70,11 +70,24 @@ function checkRateLimit(ip: string): boolean {
 export async function onRequestPost(context: EventContext): Promise<Response> {
   const { request, env } = context
 
-  // CORS headers
+  // Get origin for CORS validation
+  const origin = request.headers.get('Origin') || ''
+  const allowedOrigins = [
+    'https://pistonsim.com',
+    'https://www.pistonsim.com',
+    'http://localhost:3000', // Development
+    'http://localhost:8788', // Wrangler dev
+  ]
+
+  const isAllowedOrigin = allowedOrigins.some((allowed) => origin.startsWith(allowed))
+  const allowOrigin = isAllowedOrigin ? origin : 'https://pistonsim.com'
+
+  // CORS headers with restricted origin
   const corsHeaders = {
-    'Access-Control-Allow-Origin': '*', // Restrict to your domain in production
+    'Access-Control-Allow-Origin': allowOrigin,
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Credentials': 'true',
     'Content-Type': 'application/json',
   }
 
