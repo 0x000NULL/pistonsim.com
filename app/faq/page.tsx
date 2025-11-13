@@ -1,10 +1,14 @@
 'use client'
 
+import { useState, useMemo } from 'react'
 import { m } from 'framer-motion'
 import FAQItem from '@/components/FAQItem'
 import NewsletterForm from '@/components/NewsletterForm'
+import StructuredData from '@/components/StructuredData'
 import { FAQItem as FAQItemType } from '@/lib/types'
 import { fadeIn, fadeInUp, fadeInUpTransition, viewportConfig } from '@/lib/animations'
+import { getFAQSchema } from '@/lib/structuredData'
+import { FiSearch } from '@/lib/icons'
 
 // FAQ data organized by category
 const faqData: FAQItemType[] = [
@@ -112,8 +116,27 @@ const faqData: FAQItemType[] = [
 ]
 
 export default function FAQPage(): React.ReactElement {
+  const [searchQuery, setSearchQuery] = useState('')
+
+  // Filter FAQs based on search query
+  const filteredFaqs = useMemo(() => {
+    if (!searchQuery.trim()) {
+      return faqData
+    }
+
+    const query = searchQuery.toLowerCase()
+    return faqData.filter(
+      (faq) =>
+        faq.question.toLowerCase().includes(query) ||
+        faq.answer.toLowerCase().includes(query) ||
+        faq.category.toLowerCase().includes(query)
+    )
+  }, [searchQuery])
+
   return (
-    <main className="min-h-screen bg-background">
+    <>
+      <StructuredData data={getFAQSchema(faqData)} />
+      <main className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="section-isolated py-24 px-6">
         <div className="container-custom mx-auto">
@@ -126,9 +149,38 @@ export default function FAQPage(): React.ReactElement {
             <h1 className="font-display font-bold text-5xl md:text-7xl tracking-tight mb-6 text-cyan text-center">
               FREQUENTLY ASKED QUESTIONS
             </h1>
-            <p className="text-text-secondary text-lg md:text-xl max-w-3xl mx-auto text-center">
+            <p className="text-text-secondary text-lg md:text-xl max-w-3xl mx-auto text-center mb-8">
               Everything you need to know about PISTON engine simulation software.
             </p>
+
+            {/* Search Bar */}
+            <div className="max-w-2xl mx-auto">
+              <div className="relative">
+                <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-text-tertiary w-5 h-5" />
+                <input
+                  type="search"
+                  placeholder="Search questions..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full px-12 py-4 bg-background-secondary border-2 border-dashed border-border hover:border-border-hover focus:border-accent-primary text-text-primary placeholder-text-tertiary rounded-lg transition-colors duration-200 focus:outline-none"
+                  aria-label="Search FAQ"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-text-tertiary hover:text-text-primary transition-colors"
+                    aria-label="Clear search"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+              {searchQuery && (
+                <p className="mt-2 text-sm text-text-secondary text-center">
+                  Found {filteredFaqs.length} result{filteredFaqs.length !== 1 ? 's' : ''}
+                </p>
+              )}
+            </div>
           </m.div>
         </div>
       </section>
@@ -136,21 +188,29 @@ export default function FAQPage(): React.ReactElement {
       {/* FAQ Grid */}
       <section className="section-isolated py-12 px-6">
         <div className="container-custom mx-auto max-w-4xl">
-          <m.div
-            initial="initial"
-            whileInView="animate"
-            viewport={viewportConfig}
-            variants={fadeIn}
-            className="space-y-4"
-          >
-            {faqData.map((faq, index) => (
-              <FAQItem
-                key={index}
-                question={faq.question}
-                answer={faq.answer}
+          {filteredFaqs.length > 0 ? (
+            <m.div
+              initial="initial"
+              whileInView="animate"
+              viewport={viewportConfig}
+              variants={fadeIn}
+              className="space-y-4"
+            >
+              {filteredFaqs.map((faq, index) => (
+                <FAQItem
+                  key={index}
+                  question={faq.question}
+                  answer={faq.answer}
               />
             ))}
           </m.div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-text-secondary text-lg">
+                No FAQs found matching "{searchQuery}". Try a different search term.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -179,5 +239,6 @@ export default function FAQPage(): React.ReactElement {
         </div>
       </section>
     </main>
+    </>
   )
 }

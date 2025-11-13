@@ -3,6 +3,42 @@
 import Link from 'next/link'
 import { ReactNode } from 'react'
 
+/**
+ * Versatile button component that can render as a link or button
+ *
+ * Supports three visual variants:
+ * - primary: Cyan background with white text (main CTAs)
+ * - secondary: White text with cyan border (secondary actions)
+ * - ghost: Minimal styling, hover effects only
+ *
+ * Three size options:
+ * - sm: Compact button for tight spaces
+ * - md: Standard button size (default)
+ * - lg: Large button for hero sections
+ *
+ * Automatically renders as:
+ * - <Link> when href prop is provided (Next.js navigation)
+ * - <a> when href + external props provided (external links)
+ * - <button> when onClick prop is provided (interactive actions)
+ *
+ * @example
+ * ```tsx
+ * // Internal navigation link
+ * <Button href="/features/" variant="primary" size="lg">
+ *   Explore Features
+ * </Button>
+ *
+ * // External link
+ * <Button href="https://github.com/..." external variant="secondary">
+ *   View on GitHub
+ * </Button>
+ *
+ * // Interactive button
+ * <Button onClick={handleClick} variant="ghost">
+ *   Cancel
+ * </Button>
+ * ```
+ */
 type BaseButtonProps = {
   children: ReactNode
   variant?: 'primary' | 'secondary' | 'ghost'

@@ -8,4 +8,10 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
 }
 
-export default nextConfig
+// Bundle analyzer configuration
+// Enable with: ANALYZE=true npm run build
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+
+export default withBundleAnalyzer(nextConfig)

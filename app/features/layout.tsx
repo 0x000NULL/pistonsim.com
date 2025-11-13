@@ -6,7 +6,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Features | PISTON Engine Simulation',
     description: 'Professional-grade engine simulation software with advanced physics modeling and real-time analysis.',
+    url: 'https://pistonsim.com/features/',
     type: 'website',
+  },
+  alternates: {
+    canonical: 'https://pistonsim.com/features/',
   },
 }
 
