@@ -8,6 +8,29 @@ import { FiMenu, FiX } from '@/lib/icons'
 import { slideDown, slideDownTransition } from '@/lib/animations'
 import { NavLink, ROUTES } from '@/lib/types'
 
+/**
+ * Main navigation header component with responsive mobile menu
+ *
+ * Features:
+ * - Fixed positioning at top of viewport
+ * - Responsive mobile menu with slide animation
+ * - Automatic menu close on route change
+ * - Escape key handler for mobile menu
+ * - Active route highlighting
+ * - Accessible with ARIA attributes
+ * - Smooth animations via Framer Motion
+ *
+ * The component adapts to screen size:
+ * - Desktop: Horizontal navigation bar
+ * - Mobile: Hamburger menu with full-screen overlay
+ *
+ * @returns Fixed header with navigation links and mobile menu
+ *
+ * @example
+ * ```tsx
+ * <Header />
+ * ```
+ */
 export default function Header(): React.ReactElement {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
