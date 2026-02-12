@@ -16,7 +16,7 @@ export default function StructuredData({ data }: StructuredDataProps): React.Rea
       id={`structured-data-${Math.random().toString(36).substring(7)}`}
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-      strategy="beforeInteractive"
+      strategy="afterInteractive"
     />
   )
 }

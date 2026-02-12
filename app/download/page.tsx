@@ -7,7 +7,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import DownloadButton from '@/components/DownloadButton';
 import Card from '@/components/Card';
-import { fadeInUp, fadeIn } from '@/lib/animations';
+import { fadeInUp } from '@/lib/animations';
 
 export default function DownloadPage(): React.ReactElement {
   return (

@@ -1,10 +1,13 @@
-import { ReactNode, memo } from 'react'
+import { ReactNode, memo, ComponentType } from 'react'
 
 interface CardProps {
   children: ReactNode
   className?: string
   hover?: boolean
   dotted?: boolean
+  icon?: ComponentType<{ className?: string }>
+  title?: string
+  description?: string
 }
 
 /**
@@ -28,7 +31,7 @@ interface CardProps {
  * </Card>
  * ```
  */
-const Card = memo(function Card({ children, className = '', hover = true, dotted = true }: CardProps): React.ReactElement {
+const Card = memo(function Card({ children, className = '', hover = true, dotted = true, icon: Icon, title, description }: CardProps): React.ReactElement {
   const borderClass = dotted ? 'border-2 border-dashed' : 'border'
   const hoverClass = hover ? 'hover:border-accent-primary' : ''
 
@@ -36,6 +39,13 @@ const Card = memo(function Card({ children, className = '', hover = true, dotted
     <div
       className={`bg-background-secondary ${borderClass} border-border ${hoverClass} rounded-none p-6 transition-colors duration-300 ${className}`}
     >
+      {(Icon || title || description) && (
+        <div className="mb-4">
+          {Icon && <Icon className="w-8 h-8 text-accent-primary mb-3" />}
+          {title && <h3 className="font-mono text-xl font-bold mb-2">{title}</h3>}
+          {description && <p className="text-text-secondary text-sm">{description}</p>}
+        </div>
+      )}
       {children}
     </div>
   )

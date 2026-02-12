@@ -532,13 +532,17 @@ export default function HelpPage(): React.ReactElement {
     }
 
     return filtered;
-  }, [helpArticles, selectedCategory, searchQuery]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCategory, searchQuery]);
 
   const toggleArticle = (id: string) => {
     setExpandedArticle(expandedArticle === id ? null : id);
   };
 
   return (
+    <>
+      <Header />
+      <main id="main-content" className="min-h-screen pt-24">
       {/* Hero Section */}
       <section className="container-custom py-20 md:py-32">
         <m.div
@@ -585,6 +589,7 @@ export default function HelpPage(): React.ReactElement {
               const isActive = selectedCategory === category.id;
 
               return (
+                <button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
                   className={`
@@ -633,6 +638,7 @@ export default function HelpPage(): React.ReactElement {
                 const isExpanded = expandedArticle === article.id;
 
                 return (
+                  <m.div
                     key={article.id}
                     initial="initial"
                     whileInView="animate"

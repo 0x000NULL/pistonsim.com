@@ -6,7 +6,7 @@ import { FAQItem } from './types'
  *
  * @returns SoftwareApplication schema object
  */
-export function getSoftwareApplicationSchema() {
+export function getSoftwareApplicationSchema(): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
@@ -43,7 +43,7 @@ export function getSoftwareApplicationSchema() {
  *
  * @returns Organization schema object
  */
-export function getOrganizationSchema() {
+export function getOrganizationSchema(): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -65,7 +65,7 @@ export function getOrganizationSchema() {
  * @param faqs - Array of FAQ items
  * @returns FAQPage schema object
  */
-export function getFAQSchema(faqs: FAQItem[]) {
+export function getFAQSchema(faqs: FAQItem[]): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -86,7 +86,7 @@ export function getFAQSchema(faqs: FAQItem[]) {
  *
  * @returns Product schema object
  */
-export function getProductSchema() {
+export function getProductSchema(): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -117,7 +117,7 @@ export function getProductSchema() {
  *
  * @returns WebSite schema object
  */
-export function getWebSiteSchema() {
+export function getWebSiteSchema(): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
