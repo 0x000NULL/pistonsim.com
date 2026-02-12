@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { TestimonialData } from '@/lib/types'
 
 interface TestimonialProps extends TestimonialData {
@@ -48,9 +49,11 @@ export default function Testimonial({
       {/* Attribution */}
       <div className="flex items-center gap-3">
         {avatar && (
-          <img
+          <Image
             src={avatar}
             alt={`${author}'s avatar`}
+            width={48}
+            height={48}
             className="w-12 h-12 rounded-full border-2 border-dashed border-border"
           />
         )}

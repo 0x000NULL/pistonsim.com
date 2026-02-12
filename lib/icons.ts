@@ -38,6 +38,8 @@ export {
   FiAlertTriangle,
   FiChevronDown,
   FiChevronUp,
+  FiSearch,
+  FiChevronRight,
 } from 'react-icons/fi'
 
 // Type for icon components

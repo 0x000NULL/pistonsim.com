@@ -278,6 +278,7 @@ export default function CaseStudiesPage(): React.ReactElement {
               const Icon = study.icon;
               const isExpanded = expandedStudy === study.id;
 
+              return (
                 <m.div
                   key={study.id}
                   initial="initial"

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { onCLS, onFID, onFCP, onLCP, onTTFB, onINP, type Metric } from 'web-vitals'
+import { onCLS, onFCP, onLCP, onTTFB, onINP, type Metric } from 'web-vitals'
 
 /**
  * Web Vitals performance monitoring component
@@ -26,17 +26,9 @@ import { onCLS, onFID, onFCP, onLCP, onTTFB, onINP, type Metric } from 'web-vita
  * @param metric - The Web Vital metric data
  */
 function sendToAnalytics(metric: Metric): void {
-  const body = JSON.stringify({
-    name: metric.name,
-    value: metric.value,
-    rating: metric.rating,
-    delta: metric.delta,
-    id: metric.id,
-    navigationType: metric.navigationType,
-  })
-
   // In development, log to console
   if (process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line no-console
     console.log(`[Web Vitals] ${metric.name}:`, {
       value: metric.value,
       rating: metric.rating,
@@ -70,7 +62,6 @@ export default function WebVitals(): null {
   useEffect(() => {
     // Track all Core Web Vitals
     onCLS(sendToAnalytics)
-    onFID(sendToAnalytics)
     onFCP(sendToAnalytics)
     onLCP(sendToAnalytics)
     onTTFB(sendToAnalytics)
