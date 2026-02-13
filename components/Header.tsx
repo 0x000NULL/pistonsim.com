@@ -57,6 +57,7 @@ export default function Header(): React.ReactElement {
     { href: ROUTES.HOME, label: 'Home' },
     { href: ROUTES.FEATURES, label: 'Features' },
     { href: ROUTES.ABOUT, label: 'About' },
+    { href: ROUTES.DOCS, label: 'Docs' },
     { href: ROUTES.DOWNLOAD, label: 'Download' },
     { href: ROUTES.FAQ, label: 'FAQ' },
   ]
