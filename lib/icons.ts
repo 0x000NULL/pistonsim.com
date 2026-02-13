@@ -40,6 +40,8 @@ export {
   FiChevronUp,
   FiSearch,
   FiChevronRight,
+  FiDownload,
+  FiGithub,
 } from 'react-icons/fi'
 
 // Type for icon components
