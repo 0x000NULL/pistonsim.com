@@ -3,10 +3,10 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Download PISTON',
   description:
-    'Download PISTON engine simulation software for Windows, macOS, and Linux. Free during alpha. Professional-grade thermodynamic modeling for engine builders and enthusiasts.',
+    'Download the PISTON engine simulator and virtual dyno for 64-bit Windows: installer or portable ZIP, with SHA-256 checksums. Free for personal and commercial use.',
   openGraph: {
     title: 'Download PISTON - Free Engine Simulation Software',
-    description: 'Get started with professional-grade engine simulation. Available for Windows, macOS, and Linux.',
+    description: 'Engine simulator and virtual dyno for 64-bit Windows. Free for personal and commercial use.',
     url: 'https://pistonsim.com/download/',
     type: 'website',
   },
